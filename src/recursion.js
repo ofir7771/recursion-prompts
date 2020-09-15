@@ -5,14 +5,34 @@
 // 1. Calculate the factorial of a number. The factorial of a non-negative integer n,
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
-// factorial(5); // 120
+ // 120
 var factorial = function(n) {
+  if (n === 0) {
+    return 1;
+  }
+  if (n < 0) {
+    return null;
+  }
+  return (n * factorial(n-1));
 };
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
+var totalSum = 0;
 var sum = function(array) {
+  // if array.length === 0
+  // return sum
+  // sum + last index
+  // array.pop
+  // return sum(array)
+  if (array.length === 0) {
+    return totalSum;
+  }
+  totalSum += array[array.length - 1];
+  array.pop();
+  return sum(array);
 };
+sum([1,-2,3,-4,5,-6])
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
