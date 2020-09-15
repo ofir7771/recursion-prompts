@@ -29,17 +29,14 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  function helper(array) {
-    for (var i = 0; i < array.length; i++) {
-      var element = array[i];
-      if (Array.isArray(element)) {
-        helper(element);
-      } else {
-        return array.shift() += arraySum(element);
-      }
-    }
+  if (array.length === 0) {
+    return 0;
   }
-  helper(array);
+  if (Array.isArray(array[0])) {
+    // console.log('array before:' , array)
+    return arraySum(array[0]) + arraySum(array.slice(1));
+  }
+  return array[0] + arraySum(array.slice(1));
 };
 
 // 4. Check if a number is even.
