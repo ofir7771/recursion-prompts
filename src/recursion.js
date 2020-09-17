@@ -92,21 +92,50 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) {
+   return 1;
+  }
+  if (exp > 0) {
+    return base * exponent(base, exp-1)
+  }
+  if (exp < 0) {
+    return 1 / base * exponent(base, exp+1)
+  }
 };
+console.log(exponent(5, -4))
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n === 0) {
+    return false;
+  }
+
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  if (string.length === 0) {
+    return '';
+  }
+  var lastInd = string.length - 1;
+  return string[lastInd] + reverse(string.substring(0, lastInd))
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+   if (string.length === 0 || string.length === 1) {
+     return true;
+  }
+  if (string[0] === string[string.length - 1]) {
+    var tempStr = string.substring(1);
+    tempStr = tempStr.substring(0, tempStr.length - 1);
+    palindrome(tempStr);
+  } else {
+    return false;
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -115,11 +144,36 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x === 0 && y === 0) {
+    return NaN;
+  }
+  if (y === 1) {
+    return 0;
+  }
+  if (x <= y) {
+    return x;
+  }
+  return modulo(x-y, y)
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (x < 0 && y < 0) {
+    x = -x;
+    y = -y;
+  }
+  if (y === 0) {
+    return 0;
+  }
+  if (x === 0) {
+    return 0
+  }
+  if (y < x) {
+    return y + multiply(x-1, y)
+  } else {
+    return x + multiply(x, y-1)
+  }
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
